@@ -27,6 +27,7 @@ services:
     volumes:
       - openclaw-devices:/home/node/.openclaw/devices
       - openclaw-config:/home/node/.openclaw/agents
+      - ./openclaw.json:/home/node/.openclaw/openclaw.json:ro
     init: true
     environment:
       - OPENCLAW_GATEWAY_TOKEN=${OPENCLAW_GATEWAY_TOKEN:-clawpod-dev}
