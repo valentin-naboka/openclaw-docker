@@ -7,7 +7,6 @@ Run an OpenClaw gateway in Docker with browser automation support (Chromium + Pl
 - Docker and Docker Compose
 - An `openclaw:local` base image (the OpenClaw OCI image)
 - API keys for at least one LLM provider (Anthropic and/or OpenAI)
-- Massive proxy credentials ([sign up](https://partners.joinmassive.com/create-account-clawpod))
 
 ## Quick start
 
