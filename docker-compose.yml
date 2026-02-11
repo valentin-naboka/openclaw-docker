@@ -10,8 +10,8 @@ services:
       - ALL
     security_opt:
       - no-new-privileges:true
-    mem_limit: 1g
-    pids_limit: 256
+    mem_limit: 4g
+    pids_limit: 1024
     network_mode: bridge
 
   openclaw:
@@ -22,17 +22,26 @@ services:
     ports:
       - "18789:18789"
     tmpfs:
-      - /tmp:size=256m
-      - /dev/shm:size=256m
+      - /tmp:size=1024m
+      - /dev/shm:size=1024m
     volumes:
-      - ./SKILL.md:/home/node/.openclaw/workspace/skills/clawpod/SKILL.md:ro
-      - ./_meta.json:/home/node/.openclaw/workspace/skills/clawpod/_meta.json:ro
       - openclaw-devices:/home/node/.openclaw/devices
+      - openclaw-config:/home/node/.openclaw/agents
     init: true
     environment:
       - OPENCLAW_GATEWAY_TOKEN=${OPENCLAW_GATEWAY_TOKEN:-clawpod-dev}
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
-    command: ["node", "openclaw.mjs", "gateway", "--allow-unconfigured", "--bind", "lan"]
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    command:
+      [
+        "node",
+        "openclaw.mjs",
+        "gateway",
+        "--allow-unconfigured",
+        "--bind",
+        "lan",
+      ]
 
 volumes:
   openclaw-devices:
+  openclaw-config:

@@ -16,14 +16,14 @@ RUN apt-get update && \
 ENV PLAYWRIGHT_BROWSERS_PATH=/opt/browsers
 ENV AGENT_BROWSER_SOCKET_DIR=/tmp/agent-browser
 
-RUN npm install -g agent-browser@latest playwright && \
+RUN npm install -g agent-browser@latest playwright clawhub && \
     npx playwright install chromium && \
     npm cache clean --force && \
     chmod -R o+rx /opt/browsers
 
 # Pre-create .openclaw directories with correct ownership
 RUN mkdir -p /home/node/.openclaw/devices \
-             /home/node/.openclaw/workspace/skills/clawpod \
+             /home/node/.openclaw/workspace/skills \
              /home/node/.openclaw/canvas \
              /home/node/.openclaw/cron \
              /home/node/.openclaw/sessions && \
